@@ -31,6 +31,14 @@ The project uses an PostgresSQL for storing notifications and user data. The pri
   - `status`
   - `created_at`
 
+### Diagrams
+
+#### Entity Relationship Diagram
+![ERD](images/ERD.png)
+
+#### Database Design Schema
+![Database Design Schema](images/database_design_schema.png)
+
 ## API Endpoints
 
 ### 1. Send Notification
@@ -213,6 +221,16 @@ curl --location 'http://localhost:8080/user/add' \
 }'
 ```
 
+## Flow Diagrams
+
+### Sending Notifications
+![Notification Send Flow](images/Notification_send_flow.png)
+
+### Getting stats
+![Stats Flow](images/stats_flow.png)
+
+
+
 ## Assumptions
 
 ### The key assumptions are:
@@ -221,6 +239,7 @@ curl --location 'http://localhost:8080/user/add' \
 - The ```/stats``` api must return grouped data on a daily level, in case of date range lying within a day, all the notifications that were sent in the given timeframe are sent alongwith the count.
 - The calling service will know the user id and will use that to send the notification to a particular user.
 - Each user will have an email for email notifications and mobile number for IVR and SMS notifications.
+- All notifications are marked as sent in db, since we're not actually calling any third part API. In case it was called, we would wait for response before assigning status.
 
 ## Potential Improvements
 - A more detailed API, that has more validations such as on date ranges, emails and mobile numbers.
@@ -228,3 +247,4 @@ curl --location 'http://localhost:8080/user/add' \
 - Automated testing should be added to help speed up development and deployment.
 - Adding users can be delegated to a separate service that manages and handles adding, removing and updating users. But due to the scale of the assignment we have to put the user service here as well.
 - Notification templates could be used that can simplify the system further, these templates would have empty fields, that can be filled via params, ensuring consistency across notifications.
+- Code should be dockerized to help with deployments.
