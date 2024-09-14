@@ -221,3 +221,10 @@ curl --location 'http://localhost:8080/user/add' \
 - The ```/stats``` api must return grouped data on a daily level, in case of date range lying within a day, all the notifications that were sent in the given timeframe are sent alongwith the count.
 - The calling service will know the user id and will use that to send the notification to a particular user.
 - Each user will have an email for email notifications and mobile number for IVR and SMS notifications.
+
+## Potential Improvements
+- A more detailed API, that has more validations such as on date ranges, emails and mobile numbers.
+- In a real life system some sort of messaging or queueing will be needed, which will hold the messages till the service is ready to process in case of load.
+- Automated testing should be added to help speed up development and deployment.
+- Adding users can be delegated to a separate service that manages and handles adding, removing and updating users. But due to the scale of the assignment we have to put the user service here as well.
+- Notification templates could be used that can simplify the system further, these templates would have empty fields, that can be filled via params, ensuring consistency across notifications.
