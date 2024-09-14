@@ -213,3 +213,11 @@ curl --location 'http://localhost:8080/user/add' \
 }'
 ```
 
+## Assumptions
+
+### The key assumptions are:
+
+- The calling service will determine, which type of notification it wants to send, and not broadcast the same notification across multiple channels. (In case of broadcast we can integrate the observer design pattern).
+- The ```/stats``` api must return grouped data on a daily level, in case of date range lying within a day, all the notifications that were sent in the given timeframe are sent alongwith the count.
+- The calling service will know the user id and will use that to send the notification to a particular user.
+- Each user will have an email for email notifications and mobile number for IVR and SMS notifications.
